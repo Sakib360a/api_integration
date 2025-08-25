@@ -28,7 +28,7 @@ class ProductName extends StatelessWidget {
           PopupMenuItem(
             value: ProductOptions.update,
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 80),
+              constraints: BoxConstraints(maxWidth: 100),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 spacing: 10,
