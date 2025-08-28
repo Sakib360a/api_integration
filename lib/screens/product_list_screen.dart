@@ -2,7 +2,7 @@ import 'package:api_test/screens/product_update_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/product_list.dart';
-import 'add_product_screen.dart';
+import 'add_new_product_screen.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
