@@ -11,12 +11,13 @@ class CrudApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-            backgroundColor: Color(0xFF40a1c6), // Background for all AppBars
-            iconTheme: IconThemeData(
-              color: Colors.white, // Icon color (back arrow, menu, etc.)
-            ),),
-          colorSchemeSeed: Colors.blue,
-        useMaterial3: true
+          backgroundColor: Color(0xFF40a1c6), // Background for all AppBars
+          iconTheme: IconThemeData(
+            color: Colors.white, // Icon color (back arrow, menu, etc.)
+          ),
+        ),
+        colorSchemeSeed: Colors.blue,
+        useMaterial3: true,
       ),
 
       home: ProductListScreen(),

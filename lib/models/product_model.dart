@@ -14,7 +14,7 @@ class ProductModel {
   late int qty;
   late int price;
   late int total;
-  ProductModel.fromJson(Map<String, dynamic> productJson){
+  ProductModel.fromJson(Map<String, dynamic> productJson) {
     id = productJson['_id'];
     name = productJson['ProductName'];
     code = productJson['ProductCode'];
@@ -23,5 +23,4 @@ class ProductModel {
     price = productJson['UnitPrice'];
     total = productJson['TotalPrice'];
   }
-
 }

@@ -39,8 +39,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   controller: _nameTEController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
-                  validator: (String? value){
-                    if(value?.trim().isEmpty ?? true){
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
                       return 'Enter your value';
                     }
                     return null;
@@ -88,8 +88,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   controller: _codeTEController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
-                  validator: (String? value){
-                    if(value?.trim().isEmpty ?? true){
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
                       return 'Enter your value';
                     }
                     return null;
@@ -137,8 +137,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   controller: _quantityTEController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
-                  validator: (String? value){
-                    if(value?.trim().isEmpty ?? true){
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
                       return 'Enter your value';
                     }
                     return null;
@@ -186,8 +186,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   controller: _priceTEController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
-                  validator: (String? value){
-                    if(value?.trim().isEmpty ?? true){
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
                       return 'Enter your value';
                     }
                     return null;
@@ -235,8 +235,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   controller: _imageUrlTEController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
-                  validator: (String? value){
-                    if(value?.trim().isEmpty ?? true){
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
                       return 'Enter your value';
                     }
                     return null;
@@ -284,7 +284,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   height: 50,
                   width: double.infinity,
                   child: Visibility(
-                    visible: _addNewProductInProgress==false,
+                    visible: _addNewProductInProgress == false,
                     replacement: Center(child: CircularProgressIndicator()),
                     child: FilledButton(
                       onPressed: _onTapAddProductButton,
@@ -301,12 +301,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Future<void> _onTapAddProductButton() async {
-    if(_formKey.currentState!.validate()==false)
-      {
-        return;
-      }
+    if (_formKey.currentState!.validate() == false) {
+      return;
+    }
     _addNewProductInProgress = true;
-     setState(() {});
+    setState(() {});
     //Prepare Uri to request
     Uri uri = Uri.parse(Urls.createProduct);
     //Prepare Data
@@ -333,16 +332,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
       final decodeJson = jsonDecode(response.body);
       if (decodeJson['status'] == 'success') {
         _clearTextFields();
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Product added successfully'),
-          backgroundColor: Color(0xff3f9cc2),));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Product added successfully'),
+            backgroundColor: Color(0xff3f9cc2),
+          ),
+        );
         Navigator.pop(context);
         widget.refreshScreen();
-      }
-      else{
+      } else {
         String errorMessage = decodeJson["data"];
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
     }
     _addNewProductInProgress = false;

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:api_test/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -304,9 +303,13 @@ class _ProductUpdateScreen extends State<ProductUpdateScreen> {
                   height: 50,
                   width: double.infinity,
                   child: Visibility(
-                    visible: _updateInProgress==false,
-                      replacement: Center(child: CircularProgressIndicator()),
-                      child: FilledButton(onPressed: _updateProduct, child: Text('Update'))),
+                    visible: _updateInProgress == false,
+                    replacement: Center(child: CircularProgressIndicator()),
+                    child: FilledButton(
+                      onPressed: _updateProduct,
+                      child: Text('Update'),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -315,7 +318,6 @@ class _ProductUpdateScreen extends State<ProductUpdateScreen> {
       ),
     );
   }
-
 
   Future<void> _updateProduct() async {
     _updateInProgress = true;
@@ -334,9 +336,7 @@ class _ProductUpdateScreen extends State<ProductUpdateScreen> {
 
       Response response = await post(
         url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
 
@@ -393,10 +393,7 @@ class _ProductUpdateScreen extends State<ProductUpdateScreen> {
     } catch (e) {
       debugPrint('Error updating product: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $e'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
       );
     } finally {
       _updateInProgress = false;

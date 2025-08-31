@@ -22,6 +22,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     super.initState();
     _getProductList();
   }
+
   Future<void> _getProductList() async {
     setState(() {
       _getProductInProgress = true;
@@ -35,12 +36,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
       final decodedJson = jsonDecode(response.body);
 
       for (Map<String, dynamic> productJson in decodedJson['data']) {
-      ProductModel productModel = ProductModel.fromJson(productJson);
+        ProductModel productModel = ProductModel.fromJson(productJson);
         _productList.add(productModel);
       }
     }
     setState(() {
-      _getProductInProgress=false;
+      _getProductInProgress = false;
     });
   }
 
@@ -57,16 +58,21 @@ class _ProductListScreenState extends State<ProductListScreen> {
             onPressed: () {
               _getProductList();
             },
-            icon: Icon(Icons.refresh_rounded, color: Colors.white,size: 30),
+            icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 30),
           ),
         ],
       ),
       body: Visibility(
-        visible: _getProductInProgress==false,
+        visible: _getProductInProgress == false,
         replacement: Center(child: CircularProgressIndicator()),
         child: ListView.separated(
           itemCount: _productList.length,
-          itemBuilder: (context, index) => ProductName(product: _productList[index], refreshProductList: () { _getProductList(); },),
+          itemBuilder: (context, index) => ProductName(
+            product: _productList[index],
+            refreshProductList: () {
+              _getProductList();
+            },
+          ),
           separatorBuilder: (context, index) => Divider(indent: 70),
         ),
       ),
@@ -76,9 +82,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddProductScreen(refreshScreen: () { setState(() {
-                _getProductList();
-              }); },)),
+              MaterialPageRoute(
+                builder: (context) => AddProductScreen(
+                  refreshScreen: () {
+                    setState(() {
+                      _getProductList();
+                    });
+                  },
+                ),
+              ),
             );
           },
           child: Row(
