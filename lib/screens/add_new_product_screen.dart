@@ -1,10 +1,11 @@
 import 'dart:convert';
-
+import 'package:api_test/utils/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class AddProductScreen extends StatefulWidget {
-  const AddProductScreen({super.key});
+  const AddProductScreen({super.key, required this.refreshScreen});
+  final VoidCallback refreshScreen;
 
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
@@ -307,7 +308,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _addNewProductInProgress = true;
      setState(() {});
     //Prepare Uri to request
-    Uri uri = Uri.parse('http://35.73.30.144:2008/api/v1/CreateProduct');
+    Uri uri = Uri.parse(Urls.createProduct);
     //Prepare Data
     int totalPrice =
         int.parse(_quantityTEController.text) *
@@ -334,7 +335,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
         _clearTextFields();
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Product added successfully')));
+        ).showSnackBar(SnackBar(content: Text('Product added successfully'),
+          backgroundColor: Color(0xff3f9cc2),));
+        Navigator.pop(context);
+        widget.refreshScreen();
       }
       else{
         String errorMessage = decodeJson["data"];
