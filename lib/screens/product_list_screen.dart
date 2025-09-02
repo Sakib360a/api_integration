@@ -18,7 +18,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
   bool _getProductInProgress = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getProductList();
   }
